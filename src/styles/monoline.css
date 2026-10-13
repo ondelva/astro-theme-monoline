@@ -147,10 +147,11 @@
 
 /* Tables: the same rules as the tables of notes. Mono head over a full rule, hairlines between
    rows, everything left-aligned. A wide table scrolls inside itself on a narrow screen. */
-.note-body table {
-  display: block;
+.note-body .table-scroll {
   max-width: 100%;
   overflow-x: auto;
+}
+.note-body table {
   border-collapse: collapse;
   font-size: 0.9375rem;
   line-height: 1.5;

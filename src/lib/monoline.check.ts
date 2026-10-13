@@ -25,6 +25,10 @@ let a;
 
 Second reference.[^a]
 
+| a | b |
+| - | - |
+| 1 | 2 |
+
 [^a]: Defined first, referenced second.
 [^why]: Referenced first.
 `;
@@ -45,6 +49,8 @@ assert.match(html, /<li data-md="3.">third<\/li>\s*<li data-md="4.">fourth/);
 assert.match(html, /<li id="user-content-fn-why" data-md="\[\^1\]">/);
 assert.match(html, /<li id="user-content-fn-a" data-md="\[\^2\]">/);
 assert.match(html, /<h2 class="sr-only" id="footnote-label">/);
+// Tables scroll in a wrapper and stay tables.
+assert.match(html, /<div class="table-scroll"><table>/);
 
 // MDX notes go through the same plugin.
 const mdx = String((await mdxToJs(doc, { hastPlugins: [sourceGutter] })).code);

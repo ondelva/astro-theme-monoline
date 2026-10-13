@@ -41,8 +41,19 @@ export const markerFor = (el: El, at: number, parent?: Parent, grandparent?: El)
 export const sourceGutter: Plugin = {
   name: 'monoline-source-gutter',
   element: {
-    filter: ['h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'hr', 'pre', 'li'],
+    filter: ['h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'hr', 'pre', 'li', 'table'],
     visit(node, ctx) {
+      // A wide table scrolls in a wrapper: `display: block` on the table itself would cost it its
+      // table semantics in WebKit's screen reader.
+      if ((node as El).tagName === 'table') {
+        const wrap = {
+          type: 'element',
+          tagName: 'div',
+          properties: { className: ['table-scroll'] },
+        };
+        ctx.wrapNode(node, { ...wrap, children: [] } as never);
+        return;
+      }
       const parent = ctx.parent(node) as Parent | undefined;
       const grandparent = parent && (ctx.parent(parent as never) as El | undefined);
       const md = markerFor(node as El, ctx.indexOf(node) ?? 0, parent, grandparent);
