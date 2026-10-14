@@ -3,12 +3,14 @@
 //
 //   [the rules](/notes/design-review-rules)   the site path
 //   [the rules](./design-review-rules.md)     a relative file link (VS Code, GitHub)
-//   [[design-review-rules]]                   a wikilink (Obsidian); [[Design review rules]],
+//   [[design-review-rules]]                   a wikilink (Obsidian), printed as the note's title;
+//                                             [[Design review rules]],
 //                                             [[design-review-rules|the rules]] and
 //                                             [[design-review-rules#Who to invite]] work too
 //
 // Pure, no astro: imports: astro.config.mjs, the backlink count and the check script share it.
-import { readdirSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import type { MdastPluginDefinition } from 'satteri';
 
 /** A file name as Astro's glob loader turns it into an id: "Design review.md" -> "design-review". */
@@ -54,20 +56,27 @@ export const linkedIds = (body: string): string[] => {
   return [...new Set(ids)];
 };
 
-/** Every note id under a content folder, drafts included. */
-export const noteIds = (dir: string): Set<string> =>
-  new Set(
+/** Every note under a content folder, drafts included: id -> title (from the front matter). */
+export const noteIds = (dir: string): Map<string, string | undefined> =>
+  new Map(
     readdirSync(dir, { recursive: true, encoding: 'utf8' })
       .filter((f) => /\.mdx?$/.test(f))
-      .map((f) => idOf(f.replace(/\.mdx?$/, '').replaceAll('\\', '/'))),
+      .map((f) => [
+        idOf(f.replace(/\.mdx?$/, '').replaceAll('\\', '/')),
+        /^title:\s*['"]?(.+?)['"]?\s*$/m.exec(readFileSync(join(dir, f), 'utf8'))?.[1],
+      ]),
   );
 
 /**
  * The Markdown side: file links and wikilinks become /notes/<id> links. A link to a note that
  * does not exist (a wikilink to a note you have not written yet) prints as its text, no link.
  */
-export const noteLinks = (ids: Set<string>): MdastPluginDefinition => {
-  const known = (path: string) => ids.has(path.slice('/notes/'.length).replace(/#.*$/, ''));
+export const noteLinks = (
+  ids: Map<string, string | undefined> | Set<string>,
+): MdastPluginDefinition => {
+  const id = (path: string) => path.slice('/notes/'.length).replace(/#.*$/, '');
+  const known = (path: string) => ids.has(id(path));
+  const title = (path: string) => (ids instanceof Map ? ids.get(id(path)) : undefined);
   return {
     name: 'monoline-note-links',
     link(node, ctx) {
@@ -84,7 +93,8 @@ export const noteLinks = (ids: Set<string>): MdastPluginDefinition => {
         const [whole, target, heading, label] = m;
         if (m.index > at) parts.push({ type: 'text', value: node.value.slice(at, m.index) });
         const url = wikiHref(target!, heading);
-        const value = label?.trim() || target!.trim();
+        // No label: the note's title, as the tables print it; else the name as written.
+        const value = label?.trim() || title(url) || target!.trim();
         parts.push(
           known(url)
             ? { type: 'link', url, children: [{ type: 'text', value }] }

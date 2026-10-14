@@ -65,8 +65,11 @@ assert.match(mdx, /"data-md": "##"/);
 console.log('monoline: ok');
 
 // Links between notes as an editor writes them: ./file.md and [[wikilinks]].
-const { noteLinks, linkedIds, resolveFileLink } = await import('./note-links.ts');
-const ids = new Set(['design-review-rules', 'work/kickoff']);
+const { noteIds, noteLinks, linkedIds, resolveFileLink } = await import('./note-links.ts');
+const ids = new Map([
+  ['design-review-rules', 'Design review rules'],
+  ['work/kickoff', undefined],
+]);
 const linked = (
   markdownToHtml(
     'See [the rules](./design-review-rules.md#who), [[Design review rules]], [[design-review-rules|them]], ' +
@@ -76,6 +79,7 @@ const linked = (
 ).html;
 assert.match(linked, /<a href="\/notes\/design-review-rules#who">the rules<\/a>/);
 assert.match(linked, /<a href="\/notes\/design-review-rules">Design review rules<\/a>/);
+assert.equal(noteIds('src/content/notes').get('last-week'), 'Last week');
 assert.match(linked, /<a href="\/notes\/design-review-rules">them<\/a>/);
 assert.match(linked, /<a href="\/notes\/work\/kickoff#the-agenda">work\/kickoff<\/a>/);
 assert.match(linked, /, not written yet, gone, <code>\[\[code\]\]<\/code>/);

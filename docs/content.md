@@ -68,7 +68,7 @@ Write the link the way your editor does. All three point at `src/content/notes/d
 | `[the rules](./design-review-rules.md)`   | VS Code, GitHub, any Markdown preview |
 | `[the rules](/notes/design-review-rules)` | the site only                         |
 
-Wikilinks take a label and a heading: `[[design-review-rules|the rules]]`, `[[design-review-rules#Who to invite]]`. The name is matched the way file names become addresses, so `[[Design review rules]]` works too. A wikilink or file link to a note that does not exist yet prints as plain text, not as a broken link. Links inside code are left alone.
+Wikilinks take a label and a heading: `[[design-review-rules|the rules]]`, `[[design-review-rules#Who to invite]]`. The name is matched the way file names become addresses, so `[[Design review rules]]` works too. A wikilink without a label prints the linked note's title. A wikilink or file link to a note that does not exist yet prints as plain text, not as a broken link; once you write that note, save the linking note again (or run a fresh build) and it becomes a link, because Astro keeps each note's rendered HTML until the note itself changes. Links inside code are left alone.
 
 A file link is read from the notes folder, not from the linking note's folder: in a note in a subfolder, write `./work/kickoff.md` (or `[[work/kickoff]]`) for `src/content/notes/work/kickoff.md`.
 

@@ -1,7 +1,7 @@
 {
   "name": "astro-theme-monoline",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "description": "A free Astro theme for a notebook of short notes, set like a well-kept plain-text file, with the Markdown markers in a gutter beside the text.",
   "engines": {

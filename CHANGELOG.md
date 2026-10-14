@@ -4,6 +4,16 @@ All notable changes to this theme are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] - 2026-10-14
+
+### Changed
+
+- A wikilink without a label (`[[design-review-rules]]`) prints the linked note's title instead of its file name.
+
+### Fixed
+
+- The sample note's diagram no longer shows a shortened file name that differed from the text.
+
 ## [1.1.0] - 2026-10-14
 
 ### Added
