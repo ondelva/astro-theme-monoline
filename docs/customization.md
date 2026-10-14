@@ -71,7 +71,7 @@ Code blocks keep their own syntax colours (`github-light-high-contrast` and `git
 
 ## Dark mode
 
-The site follows the reader's system setting; the switch at the end of the footer cycles system, light and dark and remembers the choice. Set `features.darkMode` to `false` to remove the switch (the system setting still applies).
+The site follows the reader's system setting; the switch at the end of the footer (`theme: system`) cycles system, light and dark and remembers the choice. Set `features.darkMode` to `false` to remove the switch (the system setting still applies).
 
 ## Fonts
 
@@ -87,6 +87,10 @@ Keep `--font-heading` a monospace face: the tables line up their dates in `ch`, 
 ## Footer credit
 
 The footer carries one line crediting the theme: `Monoline theme by ondelva`, linking to the theme's page. It is a plain link in `src/components/common/Footer.astro`; delete it and the separator before it if you would rather not have it. Keeping it is how other people find the theme. Monoline Pro ships without it.
+
+## Words and language
+
+Every word the theme prints is in `ui` at the end of `src/config.ts`: table headings, the meta line (`8 min · 1794 words`), the 404 page, the theme switch. The footer credit is not in it (see above). To publish in another language, set `site.locale` (the page's `lang`) and translate `ui`. Counts are functions, so plurals stay right: ``words: (count) => `${count} Wörter` ``. Dates stay `YYYY-MM-DD` in every language.
 
 ## Analytics
 

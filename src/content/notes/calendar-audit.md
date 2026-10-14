@@ -15,6 +15,8 @@ The part I did not expect is how much of the saved time went into a kind of idle
 
 I borrowed the idea from Cal Newport's writing on [deep work](https://www.calnewport.com/books/deep-work/), though I have not followed his advice to the letter. I keep Slack open. I just have fewer reasons to look at it.
 
+The one recurring meeting that survived every audit is [[the-second-kickoff|the second kickoff]], because it happens once a year.
+
 ## The rule I break
 
 I never audit the meetings that other people call "optional". Those are the ones that matter most, because I attend them out of politeness. If you decline one and nothing bad happens, you have learned something. If something bad does happen, you have also learned something.

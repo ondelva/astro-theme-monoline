@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import NotesTable from '../components/notes/NotesTable.astro';
 import { getNotes } from '../lib/notes';
-import { monoline, site } from '../config';
+import { monoline, site, ui } from '../config';
 
 const notes = await getNotes();
 const recent = notes.slice(0, monoline.homeCount);
@@ -13,11 +13,11 @@ const recent = notes.slice(0, monoline.homeCount);
     {site.lede && <p class="max-w-content text-lg leading-relaxed text-pretty">{site.lede}</p>}
     {recent.length > 0 && (
       <section class="mt-12">
-        <NotesTable notes={recent} label="Recent notes" />
+        <NotesTable notes={recent} label={ui.recentNotes} />
         {notes.length > recent.length && (
           <p class="mono mt-4 text-sm">
             <a href="/notes" class="no-underline hover:underline">
-              all {notes.length} notes →
+              {ui.allCount(notes.length)}
             </a>
           </p>
         )}

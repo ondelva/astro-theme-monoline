@@ -34,7 +34,7 @@ Start the body with prose. The title is printed by the page, so do not repeat it
 | `tags`        |          | A list. The first tag fills the table's tag column; all of them appear in the note's path line.                  |
 | `draft`       |          | `true` keeps the note out of every page, table and the feed. Default `false`.                                    |
 
-Computed, so not fields: the word count and reading time (`4 min · 812 words`), the year groups and every URL.
+Computed, so not fields: the word count and reading time (`4 min · 812 words`; Chinese and Japanese count by character), the year groups and every URL.
 
 ## The source gutter
 
@@ -49,6 +49,8 @@ Every block keeps the Markdown that made it, printed small and grey in a gutter 
 | ` ``` `            | ` ``` ` beside the code block                |
 | `---`              | `---`                                        |
 | `[^1]`             | `[^1]` beside the footnote                   |
+| `\| a \| b \|`     | `\|` beside the table                        |
+| `![alt](pic.png)`  | `![]` beside a picture on a line of its own  |
 
 Plain paragraphs have no marker: a line with a marker is structure, a line without one is prose. On screens narrower than 48rem the gutter folds into a prefix on the block's first line.
 
@@ -58,7 +60,21 @@ Footnotes are listed at the end of the note, numbered in the order you first ref
 
 ## Links between notes
 
-Link to another note with its path: `[the review rules](/notes/design-review-rules)`.
+Write the link the way your editor does. All three point at `src/content/notes/design-review-rules.md`:
+
+| You write                                 | Works in                              |
+| ----------------------------------------- | ------------------------------------- |
+| `[[design-review-rules]]`                 | Obsidian and other wiki-style editors |
+| `[the rules](./design-review-rules.md)`   | VS Code, GitHub, any Markdown preview |
+| `[the rules](/notes/design-review-rules)` | the site only                         |
+
+Wikilinks take a label and a heading: `[[design-review-rules|the rules]]`, `[[design-review-rules#Who to invite]]`. The name is matched the way file names become addresses, so `[[Design review rules]]` works too. A wikilink or file link to a note that does not exist yet prints as plain text, not as a broken link. Links inside code are left alone.
+
+A file link is read from the notes folder, not from the linking note's folder: in a note in a subfolder, write `./work/kickoff.md` (or `[[work/kickoff]]`) for `src/content/notes/work/kickoff.md`.
+
+## Pictures
+
+Put the picture next to your notes, for example in `src/content/notes/images/`, and link it relatively: `![What the picture shows](./images/export-path.svg)`. It is resized and converted at build time (SVG files are served as they are), never wider than the text, with a hairline border so a white screenshot keeps its edge. On a line of its own it gets `![]` in the gutter. The alt text is what a screen reader says instead of the picture: describe what it shows.
 
 ## Tags
 

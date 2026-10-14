@@ -2,6 +2,8 @@
 // that made it, as data-md. src/styles/monoline.css draws it. Paragraphs get nothing: a line
 // with a marker is structure, a line without one is prose.
 //
+// A table is marked `|` and a picture on a line of its own `![]`.
+//
 // Lists are marked `-` whatever bullet the source used (`*`, `+`), ordered items by their real
 // number (a list may start at 3). Footnotes are marked by the number the reader sees, not
 // their label, so `[^why]` shows as `[^1]`. monoline.gutter in src/config.ts hides the markers
@@ -29,6 +31,13 @@ export const markerFor = (el: El, at: number, parent?: Parent, grandparent?: El)
   const tag = el.tagName ?? '';
   // The footnotes' own heading is screen-reader only.
   if (el.properties?.id === 'footnote-label') return null;
+  // A paragraph that is only a picture: `![alt](src)` on a line of its own.
+  if (tag === 'p') {
+    const kids = ((el as Parent).children ?? []).filter(
+      (k) => k.type !== 'text' || /\S/.test((k as { value?: string }).value ?? ''),
+    );
+    return kids.length === 1 && kids[0]!.tagName === 'img' ? '![]' : null;
+  }
   if (tag !== 'li') return FIXED[tag] ?? null;
   if (parent?.tagName === 'ul') return '-';
   // Position among element siblings: the hast keeps the newlines between items as text nodes.
@@ -41,7 +50,7 @@ export const markerFor = (el: El, at: number, parent?: Parent, grandparent?: El)
 export const sourceGutter: Plugin = {
   name: 'monoline-source-gutter',
   element: {
-    filter: ['h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'hr', 'pre', 'li', 'table'],
+    filter: ['h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'hr', 'pre', 'li', 'table', 'p'],
     visit(node, ctx) {
       // A wide table scrolls in a wrapper: `display: block` on the table itself would cost it its
       // table semantics in WebKit's screen reader.
@@ -49,7 +58,7 @@ export const sourceGutter: Plugin = {
         const wrap = {
           type: 'element',
           tagName: 'div',
-          properties: { className: ['table-scroll'] },
+          properties: { className: ['table-scroll'], dataMd: '|' },
         };
         ctx.wrapNode(node, { ...wrap, children: [] } as never);
         return;

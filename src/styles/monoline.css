@@ -62,7 +62,7 @@
   .note-body [data-md]::before {
     margin-inline-end: 1ch;
   }
-  .note-body pre[data-md]::before {
+  .note-body :is(pre, .table-scroll, p:has(> img))[data-md]::before {
     display: block;
     margin-block-end: 0.4em;
   }
@@ -143,6 +143,15 @@
   font-size: 0.9em;
   /* A long path or link in backticks breaks rather than pushing the page wider than a phone. */
   overflow-wrap: anywhere;
+}
+
+/* Pictures: full column width at most, a hairline so a white screenshot keeps its edge on the
+   white page. The alt text is the caption a screen reader hears; there is no visible one. */
+.note-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
 }
 
 /* Tables: the same rules as the tables of notes. Mono head over a full rule, hairlines between

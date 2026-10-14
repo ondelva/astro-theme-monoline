@@ -1,15 +1,21 @@
 ---
 // Light/dark switch. The value lands on <html data-theme>, which flips
 // color-scheme so every light-dark() token switches with it. No class variant.
+// The visible text says what it is ("theme: system"): a lone "system" in the footer did not
+// read as a control. Words from ui.theme in src/config.ts, passed to the script as data.
+import { ui } from '../../config';
+const { label, name, system, light, dark } = ui.theme;
 ---
 
 <button
   type="button"
   data-theme-toggle
-  aria-label="Color theme: system"
+  aria-label={`${name}: ${system}`}
+  data-name={name}
+  data-words={JSON.stringify({ system, light, dark })}
   class="font-ui text-muted hover:text-foreground"
 >
-  <span data-theme-label>system</span>
+  {label}: <span data-theme-label>{system}</span>
 </button>
 
 <script>
@@ -18,6 +24,7 @@
   const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
   const label = button?.querySelector('[data-theme-label]');
   const order = ['system', 'light', 'dark'] as const;
+  const words: Record<string, string> = JSON.parse(button?.dataset.words ?? '{}');
 
   const read = () => {
     try {
@@ -30,9 +37,10 @@
   const apply = (value: string) => {
     if (value === 'system') root.removeAttribute('data-theme');
     else root.setAttribute('data-theme', value);
-    if (label) label.textContent = value;
+    const word = words[value as keyof typeof words] ?? value;
+    if (label) label.textContent = word;
     // The name says the current state and contains the visible word (WCAG 2.5.3).
-    button?.setAttribute('aria-label', `Color theme: ${value}`);
+    button?.setAttribute('aria-label', `${button.dataset.name}: ${word}`);
   };
 
   apply(read());

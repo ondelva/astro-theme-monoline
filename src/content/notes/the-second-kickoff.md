@@ -32,6 +32,8 @@ We ended with one sentence, "make the monthly invoice understandable to someone 
 
 The facilitator should not be the project lead. I ran the billing one and had to bite my tongue through the reading-out, because my own answer was different from the others and I wanted to defend it. Since then I ask someone from another team to run it. Priya did the last one and was better at the silence than I am.
 
+I take notes the way I described in [a year of research notes](./a-year-of-research-notes.md): one file, dated, written the same day.
+
 It also helps to hold it somewhere other than the usual room. We did the 2025 one in the library on the ground floor, with the door shut and phones in a box. Everyone wrote more.
 
 I considered making it a quarterly habit. Dina argued against it, and I think she was right: the value of a second kickoff comes partly from its rarity. A meeting that happens every three months is a status meeting with a better name. The one in March is special because it comes after a long stretch of nobody asking, and by then people are ready to be asked.

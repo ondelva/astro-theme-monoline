@@ -2,7 +2,7 @@
 // The theme switch lives here, not in the header: at 360px the header holds the name and the
 // paths, and nothing else fits on its one line.
 import ThemeToggle from './ThemeToggle.astro';
-import { features, site } from '../../config';
+import { features, site, ui } from '../../config';
 
 const year = new Date().getFullYear();
 ---
@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
   <p class="max-w-wide mx-auto px-4 py-6">
     {`© ${year} ${site.author}`} ·{' '}
     <a href="/rss.xml" class="hover:text-foreground">
-      rss
+      {ui.rss}
     </a>
     {/* The theme credit. Remove it if you like: the MIT license does not require it. */}
     {' · '}

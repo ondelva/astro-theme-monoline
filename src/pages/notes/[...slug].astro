@@ -2,7 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getNotes, isoDate, notePath, type Note } from '../../lib/notes';
-import { monoline, site } from '../../config';
+import { monoline, site, ui } from '../../config';
 
 export const getStaticPaths = async () => {
   const notes = await getNotes();
@@ -41,28 +41,25 @@ const { Content } = await render(note);
     <div class="note-column">
       <p class="mono text-muted text-xs">
         <a href="/notes" class="hover:text-foreground no-underline">
-          notes
+          {ui.notes}
         </a>{' '}
         / <time datetime={isoDate(date)}>{isoDate(date)}</time>
         {tags.length > 0 && ` / ${tags.map((t) => `#${t}`).join(' ')}`}
       </p>
       <h1 class="mono mt-3 text-2xl leading-snug font-medium">{title}</h1>
       <p class="mono text-muted mt-2 text-xs">
-        {note.minutes} min · {note.words} words
-        {updated && ` · updated ${isoDate(updated)}`}
+        {ui.meta.minutes(note.minutes)} · {ui.meta.words(note.words)}
+        {updated && ` · ${ui.meta.updated(isoDate(updated))}`}
       </p>
       <div class:list={['note-body mt-8', !monoline.gutter && 'no-gutter']}>
         <Content />
       </div>
       {(older || newer) && (
-        <nav
-          aria-label="Older and newer notes"
-          class="mono border-border mt-12 border-t pt-4 text-sm"
-        >
+        <nav aria-label={ui.olderNewer} class="mono border-border mt-12 border-t pt-4 text-sm">
           <ul class="space-y-2">
             {older && (
               <li>
-                <span class="text-muted">older </span>
+                <span class="text-muted">{ui.older} </span>
                 <a href={notePath(older)} class="no-underline hover:underline">
                   {older.data.title}
                 </a>
@@ -70,7 +67,7 @@ const { Content } = await render(note);
             )}
             {newer && (
               <li>
-                <span class="text-muted">newer </span>
+                <span class="text-muted">{ui.newer} </span>
                 <a href={notePath(newer)} class="no-underline hover:underline">
                   {newer.data.title}
                 </a>

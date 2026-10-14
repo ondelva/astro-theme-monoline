@@ -19,6 +19,8 @@ I went through this site's older notes last weekend to see what I would write di
 
 **Be consistent.** Consistent with what? In the second year I realised that I had been consistent mostly to avoid deciding.
 
+Two of these turned into notes of their own: [the calendar audit](./calendar-audit.md) is the long version of the first one, and [[invoice-export-research]] of the third.
+
 I will probably disagree with this list by 2028, and that's fine. I would rather have a dated record of being wrong than a clean record that says nothing.
 
 [^1]: The workshop in question was in Porto, in March 2025. The six were chosen by Hana, who knew who would argue and who would listen.

@@ -16,12 +16,14 @@ Monoline is for people who keep notes in Markdown and want the site to look like
 ## Features
 
 - Astro 7 + Tailwind CSS v4, static output; the only client-side JavaScript is the theme toggle
-- The source gutter for headings, quotes, lists (with their real numbers), code, rules and footnotes
+- The source gutter for headings, quotes, lists (with their real numbers), code, rules, tables, pictures and footnotes
+- Links between notes as your editor writes them: `[[wikilinks]]`, `./note.md` links or site paths
 - Home and index as tables of notes: date, title, tag; the index grouped by year
 - A note page with its path, word count and reading time, and the older and newer notes
 - An About page in the same column, with the gutter
 - RSS, sitemap, structured data
 - Dark mode, responsive from 360px, Lighthouse 95+ on all four categories, checked in CI
+- Every word the theme prints in one place (`ui` in `src/config.ts`), for sites in other languages
 - Type-safe content collection (Markdown and MDX), and `AGENTS.md` for Claude Code / Cursor
 
 ## Quick start

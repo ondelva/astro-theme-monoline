@@ -41,6 +41,8 @@ Eleven of fourteen said, in one form or another, that they do not trust a tool t
 
 That changed how I read the 1,310 repeat exports. Some of them were not working sessions at all. They were filing. At the end of every month several people export the whole list, rename the file to something like `2026-08_invoices_final.csv`, and put it in a shared drive next to the bank statements.
 
+![Four boxes joined by arrows: invoice list, export .csv, rename file, shared drive. Under them: 1,310 repeat exports, 2026-08_final.csv, next to the bank statements.](./images/export-path.svg)
+
 ### Reason two: the number they need does not exist in our product
 
 This was the biggest group, and it is the one my first guess got partly right. People were not complaining that our reports are thin. They were complaining that the figure they needed was a combination of two things we show on different screens.

@@ -2,6 +2,7 @@
 // The table of notes: one line per note, the columns of a well-kept index file.
 // Home and /notes share it. Widths are in ch of the mono face, so dates line up.
 import { isoDate, notePath, type Note } from '../../lib/notes';
+import { ui } from '../../config';
 
 interface Props {
   notes: Note[];
@@ -24,13 +25,13 @@ for (const note of notes) {
   <thead>
     <tr class="text-muted border-foreground border-b text-xs">
       <th scope="col" class="pb-2 text-start font-normal">
-        date
+        {ui.table.date}
       </th>
       <th scope="col" class="pb-2 text-start font-normal">
-        note
+        {ui.table.note}
       </th>
       <th scope="col" class="pb-2 text-start font-normal max-sm:hidden">
-        tag
+        {ui.table.tag}
       </th>
     </tr>
   </thead>

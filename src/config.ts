@@ -42,3 +42,30 @@ export const analytics = {
   // Empty means the hosted service. GA4 ignores it.
   host: '',
 };
+
+// Every word the theme prints, in one place: translate these along with site.locale.
+// Dates stay YYYY-MM-DD in every language.
+const n = (count: number, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
+export const ui = {
+  skipToContent: 'Skip to content',
+  notes: 'notes', // the /notes heading and the first part of every path line
+  table: { date: 'date', note: 'note', tag: 'tag' },
+  recentNotes: 'Recent notes', // read out before the home table
+  allNotes: 'All notes', // read out before the /notes table
+  allNotesLink: 'all notes →',
+  allCount: (count: number) => `all ${count} notes →`,
+  notesDescription: (count: number) => `All ${count} notes, newest first.`,
+  nothingYet: 'Nothing here yet.',
+  meta: {
+    minutes: (count: number) => `${count} min`,
+    words: (count: number) => n(count, 'word', 'words'),
+    updated: (date: string) => `updated ${date}`,
+  },
+  older: 'older',
+  newer: 'newer',
+  olderNewer: 'Older and newer notes',
+  notFound: 'There is no note at this address.',
+  recent: 'recent',
+  rss: 'rss',
+  theme: { label: 'theme', system: 'system', light: 'light', dark: 'dark', name: 'Color theme' },
+};

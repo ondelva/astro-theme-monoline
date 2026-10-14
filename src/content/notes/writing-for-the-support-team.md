@@ -28,4 +28,6 @@ Step three was Karim's addition and it was the best one. People do not know whet
 
 I did lose a few arguments. I wanted to take out "please" and "simply" and "just" everywhere. Karim kept "please" in the contact step, because he said it changes how a frustrated person writes their message. He may well be right. The tone of the incoming tickets does seem calmer, but I only have his word for it, and we have not measured it.
 
+Several of those tickets were about exports, which is how [[invoice-export-research|the export research]] started.
+
 What I take back to my own work is smaller than I expected. I now read the first sentence of anything I write as if I were someone with a declined card, and I check where the button is.

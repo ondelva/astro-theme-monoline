@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { countWords, excerpt, readingMinutes } from './text';
+import { countCjk, countWords, excerpt, readingMinutes } from './text';
 
 export { isoDate } from './text';
 
@@ -19,7 +19,7 @@ export const getNotes = async (): Promise<Note[]> =>
       return {
         ...entry,
         words,
-        minutes: readingMinutes(words),
+        minutes: readingMinutes(words, countCjk(body)),
         summary: entry.data.description ?? excerpt(body),
       };
     })

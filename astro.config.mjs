@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import { site } from './src/config.ts';
 import { sourceGutter } from './src/lib/monoline-plugin.ts';
+import { noteIds, noteLinks } from './src/lib/note-links.ts';
 
 // Webfonts. Reading text in Atkinson Hyperlegible Next; everything structural (navigation,
 // dates, titles, paths, the source gutter, code) in its monospaced sibling. One family, the
@@ -38,7 +39,11 @@ export default defineConfig({
   site: process.env.SITE_URL ?? site.url,
   markdown: {
     // Astro 7 renders Markdown with Sätteri: plugins are hast/mdast visitors, not rehype plugins.
-    processor: satteri({ hastPlugins: [sourceGutter] }),
+    // noteLinks: [[wikilinks]] and ./note.md links become /notes/<id> (src/lib/note-links.ts).
+    processor: satteri({
+      mdastPlugins: [noteLinks(noteIds('./src/content/notes'))],
+      hastPlugins: [sourceGutter],
+    }),
     // Both themes as CSS variables on --surface (monoline.css). The high-contrast pair keeps
     // comments above AA; the defaults set them near 3:1.
     shikiConfig: {
