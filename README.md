@@ -5,6 +5,8 @@ An Astro theme for a notebook of short notes, set like a well-kept plain-text fi
 [Live demo](https://monoline-free.ondelva.com) · [Pro demo](https://monoline.ondelva.com) ·
 [Get Pro](https://buy.polar.sh/polar_cl_MwdBJ0ZMyYjjubu30TEMiE89siUsa5Rh1hBA32Bx3hw)
 
+What's new: [release notes](https://github.com/ondelva/astro-theme-monoline/releases) · [changelog in the demo](https://monoline-free.ondelva.com/whats-new/)
+
 ![Monoline: a note with its Markdown markers in the gutter](docs/screenshots/home-light.png)
 
 ## What it is
