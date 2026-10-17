@@ -14,6 +14,12 @@ In May I added up the recurring meetings on my team's calendar. I did it because
 | Critique         | 60 min | 6      | 24.0            |
 | Roadmap check-in | 30 min | 9      | 18.0            |
 
+Every row is the same sum, with four weeks to a month:
+
+$$
+\text{hours per month} = \text{length in hours} \times \text{people} \times 4
+$$
+
 That is 72 person-hours a month, spread across six designers. It works out to twelve hours each, a day and a half of working time, before anyone has opened a file.[^1]
 
 ## What I did about it

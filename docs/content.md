@@ -51,6 +51,7 @@ Every block keeps the Markdown that made it, printed small and grey in a gutter 
 | `[^1]`             | `[^1]` beside the footnote                   |
 | `\| a \| b \|`     | `\|` beside the table                        |
 | `![alt](pic.png)`  | `![]` beside a picture on a line of its own  |
+| `$$`               | `$$` beside a formula on its own lines       |
 
 Plain paragraphs have no marker: a line with a marker is structure, a line without one is prose. On screens narrower than 48rem the gutter folds into a prefix on the block's first line.
 
@@ -71,6 +72,12 @@ Write the link the way your editor does. All three point at `src/content/notes/d
 Wikilinks take a label and a heading: `[[design-review-rules|the rules]]`, `[[design-review-rules#Who to invite]]`. The name is matched the way file names become addresses, so `[[Design review rules]]` works too. A wikilink without a label prints the linked note's title. A wikilink or file link to a note that does not exist yet prints as plain text, not as a broken link; once you write that note, save the linking note again (or run a fresh build) and it becomes a link, because Astro keeps each note's rendered HTML until the note itself changes. Links inside code are left alone.
 
 A file link is read from the notes folder, not from the linking note's folder: in a note in a subfolder, write `./work/kickoff.md` (or `[[work/kickoff]]`) for `src/content/notes/work/kickoff.md`.
+
+## Math
+
+Write a formula between dollar signs: `$…$` inside a sentence, `$$…$$` on lines of its own. It is set with KaTeX when the site is built, so the page needs no script, and only a note with math loads KaTeX's stylesheet. Chemical equations use mhchem: `$\ce{2H2 + O2 -> 2H2O}$`.
+
+Two dollar signs in one paragraph (`$20 and $30`) read as a formula between them. Write `\$` for a dollar sign you mean literally.
 
 ## Pictures
 

@@ -1,5 +1,6 @@
 ---
 import { render } from 'astro:content';
+import katexCss from 'katex/dist/katex.min.css?url';
 import Base from '../../layouts/Base.astro';
 import { getNotes, isoDate, notePath, type Note } from '../../lib/notes';
 import { monoline, site, ui } from '../../config';
@@ -20,7 +21,7 @@ interface Props {
 }
 const { note, older, newer } = Astro.props;
 const { title, date, updated, tags } = note.data;
-const { Content } = await render(note);
+const { Content, remarkPluginFrontmatter } = await render(note);
 ---
 
 <Base
@@ -37,6 +38,7 @@ const { Content } = await render(note);
     },
   ]}
 >
+  {remarkPluginFrontmatter.hasMath && <link slot="head" rel="stylesheet" href={katexCss} />}
   <article class="max-w-wide mx-auto px-4 pt-10">
     <div class="note-column">
       <p class="mono text-muted text-xs">

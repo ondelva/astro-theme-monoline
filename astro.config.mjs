@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import { site } from './src/config.ts';
 import { sourceGutter } from './src/lib/monoline-plugin.ts';
+import { math } from './src/lib/math.ts';
 import { noteIds, noteLinks } from './src/lib/note-links.ts';
 
 // Webfonts. Reading text in Atkinson Hyperlegible Next; everything structural (navigation,
@@ -40,8 +41,10 @@ export default defineConfig({
   markdown: {
     // Astro 7 renders Markdown with Sätteri: plugins are hast/mdast visitors, not rehype plugins.
     // noteLinks: [[wikilinks]] and ./note.md links become /notes/<id> (src/lib/note-links.ts).
+    // math: $…$ and $$…$$ become KaTeX HTML at build time (src/lib/math.ts).
     processor: satteri({
-      mdastPlugins: [noteLinks(noteIds('./src/content/notes'))],
+      features: { math: true },
+      mdastPlugins: [noteLinks(noteIds('./src/content/notes')), math],
       hastPlugins: [sourceGutter],
     }),
     // Both themes as CSS variables on --surface (monoline.css). The high-contrast pair keeps

@@ -4,6 +4,21 @@ All notable changes to this theme are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-10-17
+
+### Added
+
+- Math in notes: `$…$` inline and `$$…$$` on lines of their own, set with KaTeX at build time (no
+  client JavaScript), with `$$` in the source gutter. Chemical equations work through mhchem
+  (`\ce{…}`). Only a note with math loads the KaTeX stylesheet and fonts. If a note has two dollar
+  amounts in one paragraph (`$20 and $30`), the text between them now renders as a formula:
+  escape them as `\$20`.
+
+### Fixed
+
+- The `|` marker beside a table shows in the gutter on wide screens again. It sat on the table's
+  scroll box, which clipped it; it now sits on a block around that box.
+
 ## [1.1.1] - 2026-10-14
 
 ### Changed

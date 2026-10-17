@@ -53,15 +53,22 @@ export const sourceGutter: Plugin = {
     filter: ['h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'hr', 'pre', 'li', 'table', 'p'],
     visit(node, ctx) {
       // A wide table scrolls in a wrapper: `display: block` on the table itself would cost it its
-      // table semantics in WebKit's screen reader.
+      // table semantics in WebKit's screen reader. The marker goes on an outer block that does not
+      // scroll: it hangs outside its box, and a scroll box would clip it. wrapNode takes one
+      // wrapper, so the table is copied into both (a plain copy: the visitor hands out a view).
       if ((node as El).tagName === 'table') {
-        const wrap = {
+        const table = JSON.parse(JSON.stringify(node));
+        const scroll = {
           type: 'element',
           tagName: 'div',
-          properties: { className: ['table-scroll'], dataMd: '|' },
+          properties: { className: ['table-scroll'] },
         };
-        ctx.wrapNode(node, { ...wrap, children: [] } as never);
-        return;
+        return {
+          type: 'element',
+          tagName: 'div',
+          properties: { className: ['table-block'], dataMd: '|' },
+          children: [{ ...scroll, children: [table] }],
+        } as never;
       }
       const parent = ctx.parent(node) as Parent | undefined;
       const grandparent = parent && (ctx.parent(parent as never) as El | undefined);

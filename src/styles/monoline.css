@@ -62,7 +62,7 @@
   .note-body [data-md]::before {
     margin-inline-end: 1ch;
   }
-  .note-body :is(pre, .table-scroll, p:has(> img))[data-md]::before {
+  .note-body :is(pre, .table-block, .math-display, p:has(> img))[data-md]::before {
     display: block;
     margin-block-end: 0.4em;
   }
@@ -152,6 +152,20 @@
   max-width: 100%;
   height: auto;
   border: 1px solid var(--border);
+}
+
+/* A display formula (src/lib/math.ts). The wrapper carries the `$$` marker and does not clip it;
+   the formula scrolls inside. KaTeX's glyphs overhang the line box by a few px, which the scroll
+   box would clip, so the room goes inside as padding instead of KaTeX's 1em margin. */
+.note-body .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 0;
+  padding-block: 0.5em;
+}
+/* The marker sits on the formula's line, below the padding. */
+.note-body .math-display {
+  --block-top: 0.5em;
 }
 
 /* Tables: the same rules as the tables of notes. Mono head over a full rule, hairlines between

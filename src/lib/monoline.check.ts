@@ -54,7 +54,7 @@ assert.match(html, /<li id="user-content-fn-why" data-md="\[\^1\]">/);
 assert.match(html, /<li id="user-content-fn-a" data-md="\[\^2\]">/);
 assert.match(html, /<h2 class="sr-only" id="footnote-label">/);
 // Tables scroll in a wrapper and stay tables.
-assert.match(html, /<div class="table-scroll" data-md="\|"><table>/);
+assert.match(html, /<div class="table-block" data-md="\|"><div class="table-scroll"><table>/);
 assert.match(html, /<p data-md="!\[\]"><img src="pic.png" alt="A sketch"><\/p>/);
 assert.match(html, /<p>Text with <img src="inline.png" alt="x"> inside.<\/p>/);
 
@@ -63,6 +63,17 @@ const mdx = String((await mdxToJs(doc, { hastPlugins: [sourceGutter] })).code);
 assert.match(mdx, /"data-md": "##"/);
 
 console.log('monoline: ok');
+
+// Math: KaTeX at build time. Inline stays in its paragraph (a raw string in Markdown would be
+// read again and land in its own <p>); a display formula carries the `$$` gutter marker.
+const { math } = await import('./math.ts');
+const opts = { features: { math: true }, mdastPlugins: [math] };
+const withMath = (markdownToHtml('A gap $g$ here.\n\n$$\nx\n$$\n', opts) as MarkdownToHtmlResult)
+  .html;
+assert.match(withMath, /<p>A gap <span class="katex">/);
+assert.match(withMath, /<div class="math-display" data-md="\$\$"><span class="katex-display">/);
+assert.match(String((await mdxToJs('A gap $g$ here.', opts)).code), /"katex"/);
+console.log('math: ok');
 
 // Links between notes as an editor writes them: ./file.md and [[wikilinks]].
 const { noteIds, noteLinks, linkedIds, resolveFileLink } = await import('./note-links.ts');

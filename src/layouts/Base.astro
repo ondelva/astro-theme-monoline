@@ -26,6 +26,7 @@ const { home = false, ...seo } = Astro.props;
     <Font cssVariable="--font-body" preload={[{ weight: '400', style: 'normal' }]} />
     <Font cssVariable="--font-heading" preload={[{ weight: '400', style: 'normal' }]} />
     <SEO {...seo} />
+    <slot name="head" />
     <Analytics />
     <script is:inline>
       // Before first paint, or the page flashes the system theme.
