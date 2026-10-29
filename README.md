@@ -3,7 +3,7 @@
 An Astro theme for a notebook of short notes, set like a well-kept plain-text file. Free and MIT-licensed.
 
 [Live demo](https://monoline-free.ondelva.com) · [Pro demo](https://monoline.ondelva.com) ·
-[Get Pro](https://buy.polar.sh/polar_cl_MwdBJ0ZMyYjjubu30TEMiE89siUsa5Rh1hBA32Bx3hw)
+[Get Pro](https://buy.polar.sh/polar_cl_MwdBJ0ZMyYjjubu30TEMiE89siUsa5Rh1hBA32Bx3hw?utm_source=github)
 
 What's new: [release notes](https://github.com/ondelva/astro-theme-monoline/releases) · [changelog in the demo](https://monoline-free.ondelva.com/whats-new/)
 
@@ -63,7 +63,7 @@ Set `SITE_URL` to your address afterwards. See [docs/deploy.md](docs/deploy.md).
 
 The free edition is a finished notes site with the source gutter. Pro adds the ways notes connect to each other, and the ways readers find and follow them:
 see it at [monoline.ondelva.com](https://monoline.ondelva.com), and
-[buy it here](https://buy.polar.sh/polar_cl_MwdBJ0ZMyYjjubu30TEMiE89siUsa5Rh1hBA32Bx3hw): $49 for one person, $129 for a team of up to ten.
+[buy it here](https://buy.polar.sh/polar_cl_MwdBJ0ZMyYjjubu30TEMiE89siUsa5Rh1hBA32Bx3hw?utm_source=github): $49 for one person, $129 for a team of up to ten.
 
 |                | Free                                | Pro                                         |
 | -------------- | ----------------------------------- | ------------------------------------------- |
